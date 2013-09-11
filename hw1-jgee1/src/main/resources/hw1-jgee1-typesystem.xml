@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-jgee1-typesystem</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+  <types>
+    <typeDescription>
+      <name>edu.cmu.lti.deiis.qa.types.QAAnnotation</name>
+      <description>QAAnnotator is the base annotation for this system. It extends UIMA’s built-in Annotation class with additional fields, namely casProcessorID and confidence.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>confidence</name>
+          <description>the assigned confidence for this QAAnnotation</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>casProcessorID</name>
+          <description>the Annotator/Processor that produced this Annotation.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.cmu.lti.deiis.qa.types.Answer</name>
+      <description>Annotation used to distinguish an Answer statement.</description>
+      <supertypeName>edu.cmu.lti.deiis.qa.types.StatementBase</supertypeName>
+    <features>
+        <featureDescription>
+          <name>isCorrect</name>
+          <description>boolean flag for trained data that signifies whether this answer is correct (true) or incorrect (false).</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.cmu.lti.deiis.qa.types.AnswerScore</name>
+      <description>score given by a scoring mechanism for a specific question-answer pair.</description>
+      <supertypeName>edu.cmu.lti.deiis.qa.types.QAAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>answer</name>
+          <description>Answer that this answer score belongs to.</description>
+          <rangeTypeName>edu.cmu.lti.deiis.qa.types.Answer</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>question</name>
+          <description>Question for which this answer score pertains to.</description>
+          <rangeTypeName>edu.cmu.lti.deiis.qa.types.Question</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>score</name>
+          <description>the score value (between 0 and 1) for a question and answer pair.</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.cmu.lti.deiis.qa.types.Question</name>
+      <description>Annotation used to distinguish a Question statement.</description>
+      <supertypeName>edu.cmu.lti.deiis.qa.types.StatementBase</supertypeName>
+    <features>
+        <featureDescription>
+          <name>candidateAnswers</name>
+          <description>a list of candidate Answers for this statement</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>edu.cmu.lti.deiis.qa.types.Answer</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>edu.cmu.lti.deiis.qa.types.NGram</name>
+      <description>N-grams are N-consecutive token combinations contained within statements.</description>
+      <supertypeName>edu.cmu.lti.deiis.qa.types.QAAnnotation</supertypeName>
+    <features>
+        <featureDescription>
+          <name>tokens</name>
+          <description>Tokens contained within an NGram object</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>edu.cmu.lti.deiis.qa.types.Token</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>edu.cmu.lti.deiis.qa.types.Token</name>
+      <description>Annotation for the single token of a statement.</description>
+      <supertypeName>edu.cmu.lti.deiis.qa.types.QAAnnotation</supertypeName>
+      </typeDescription>
+  <typeDescription>
+      <name>edu.cmu.lti.deiis.qa.types.StatementBase</name>
+      <description>StatementBase is the annotation used to describe a line of text. StatementBase objects contain a finite number of tokens and n-grams.</description>
+      <supertypeName>edu.cmu.lti.deiis.qa.types.QAAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tokens</name>
+          <description>a list of Token annotations for this statement</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>edu.cmu.lti.deiis.qa.types.Token</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>unigrams</name>
+          <description>a list of unigram annotations for this sentence.</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>edu.cmu.lti.deiis.qa.types.NGram</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>bigrams</name>
+          <description>a list of bigram annotations for this sentence.</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>edu.cmu.lti.deiis.qa.types.NGram</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>trigrams</name>
+          <description>a list of trigram annotations for this statement.</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>edu.cmu.lti.deiis.qa.types.NGram</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    </types>
+</typeSystemDescription>
